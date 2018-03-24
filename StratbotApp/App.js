@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, Button } from 'react-native';
 
-class VaultButtons extends Component {
+class SideButtons extends Component {
 	render() {
 		vtmpBtn = () => {}
 
@@ -10,12 +10,25 @@ class VaultButtons extends Component {
 				<Button
 					onPress={vtmpBtn}
 					title='Them Vault'
+					color='darkblue'
+				/>
+
+				<Button
+					onPress={vtmpBtn}
+					title='Them Boost'
 					color='green'
 				/>
+
+				<Button
+					onPress={vtmpBtn}
+					title='Them Force'
+					color='darkgreen'
+				/>
+
 				<Button
 					onPress={vtmpBtn}
 					title='Us Vault'
-					color='green'
+					color='darkred'
 				/>
 			</View>
 		);
@@ -97,12 +110,38 @@ class TripleButtons extends Component {
 	}
 }
 
+class BottonButtons extends Component {
+	render() {
+		btmpBtn = () => {}
+
+		return (
+			<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+					<Button
+						onPress={tmpBtn}
+						title='Objective'
+						color='violet'
+					/>
+
+					<Button
+						onPress={tmpBtn}
+						title='Powerup'
+						color='violet'
+					/>
+			</View>
+		);
+	}
+}
+
 export default class LotsOfGreetings extends Component {
 	render() {
 		return (
-			<View style={{flexDirection: 'row', justifyContent: 'center'}}>
-				<VaultButtons/>
-				<TripleButtons/>
+			<View style={{flexDirection: 'column'}}>
+				<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+					<SideButtons/>
+					<TripleButtons/>
+				</View>
+
+				<BottonButtons/>
 			</View>
 		);
 	}
