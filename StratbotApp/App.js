@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, Button } from 'react-native';
 
-class TripleButtons extends Component {
+class VaultButtons extends Component {
+	render() {
+		vtmpBtn = () => {}
 
+		return (
+			<View style={{flexDirection: 'column', justifyContent: 'center'}}>
+				<Button
+					onPress={vtmpBtn}
+					title='Them Vault'
+					color='green'
+				/>
+				<Button
+					onPress={vtmpBtn}
+					title='Us Vault'
+					color='green'
+				/>
+			</View>
+		);
+	}
+}
+
+class TripleButtons extends Component {
 	render() {
 		tmpBtn = () => {}
 
@@ -80,7 +100,8 @@ class TripleButtons extends Component {
 export default class LotsOfGreetings extends Component {
 	render() {
 		return (
-			<View style={{alignItems: 'center'}}>
+			<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+				<VaultButtons/>
 				<TripleButtons/>
 			</View>
 		);
