@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, Button } from 'react-native';
 
+obj_text = 'Go to {obj}'
+powerup_text = 'Use {powerup}'
+
 class SideButtons extends Component {
 	render() {
 		vtmpBtn = () => {}
 
 		return (
-			<View style={{flexDirection: 'column', justifyContent: 'center'}}>
+			<View style={{flexDirection: 'column'}}>
 				<Button
 					onPress={vtmpBtn}
 					title='Them Vault'
@@ -115,18 +118,18 @@ class BottonButtons extends Component {
 		btmpBtn = () => {}
 
 		return (
-			<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+			<View style={{flexDirection: 'row'}}>
+					<View style={{backgroundColor: 'violet'}}>
+						<Text>{obj_text}</Text>
+					</View>
 					<Button
 						onPress={tmpBtn}
-						title='Objective'
-						color='violet'
+						title='Reset'
+						color='black'
 					/>
-
-					<Button
-						onPress={tmpBtn}
-						title='Powerup'
-						color='violet'
-					/>
+					<View style={{backgroundColor: 'violet'}}>
+						<Text>{powerup_text}</Text>
+					</View>
 			</View>
 		);
 	}
@@ -135,8 +138,8 @@ class BottonButtons extends Component {
 export default class LotsOfGreetings extends Component {
 	render() {
 		return (
-			<View style={{flexDirection: 'column'}}>
-				<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+			<View style={{flexDirection: 'column', flex:1}}>
+				<View style={{flexDirection: 'row'}}>
 					<SideButtons/>
 					<TripleButtons/>
 				</View>
