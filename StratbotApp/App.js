@@ -1,35 +1,59 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, Button } from 'react-native';
 
-obj_text = 'Go to {obj}'
-powerup_text = 'Use {powerup}'
+obj_text = 'Go to {obj}';
+powerup_text = 'Use {powerup}';
+
+const US = 1;
+const NEUTRAL = 0;
+const THEM = -1;
+
+const FAR_SWITCH = 10;
+const SCALE = 11;
+const NEAR_SWITCH = 12;
+
+var fars_state = NEUTRAL;
+var scale_state = NEUTRAL;
+var nears_state = NEUTRAL;
 
 class SideButtons extends Component {
+	them_vault() {
+	}
+
+	them_boost() {
+	}
+
+	them_force() {
+	}
+
+	us_vault() {
+	}
+
 	render() {
 		vtmpBtn = () => {}
 
 		return (
 			<View style={{flexDirection: 'column'}}>
 				<Button
-					onPress={vtmpBtn}
+					onPress={this.them_vault}
 					title='Them Vault'
 					color='darkblue'
 				/>
 
 				<Button
-					onPress={vtmpBtn}
+					onPress={this.them_boost}
 					title='Them Boost'
 					color='green'
 				/>
 
 				<Button
-					onPress={vtmpBtn}
+					onPress={this.them_force}
 					title='Them Force'
 					color='darkgreen'
 				/>
 
 				<Button
-					onPress={vtmpBtn}
+					onPress={this.us_vault}
 					title='Us Vault'
 					color='darkred'
 				/>
@@ -39,6 +63,29 @@ class SideButtons extends Component {
 }
 
 class TripleButtons extends Component {
+	fs_u() {
+		powerup_text = 'tmp';
+
+	}
+	fs_n() {
+	}
+	fs_t() {
+	}
+
+	s_u() {
+	}
+	s_n() {
+	}
+	s_t() {
+	}
+
+	ns_u() {
+	}
+	ns_n() {
+	}
+	ns_t() {
+	}
+
 	render() {
 		tmpBtn = () => {}
 
@@ -48,19 +95,19 @@ class TripleButtons extends Component {
 				<Text>Far Switch</Text>
 				<View style={{flexDirection: 'row'}}>
 					<Button
-						onPress={tmpBtn}
+						onPress={this.fs_u}
 						title='Us'
 						color='red'
 					/>
 
 					<Button
-						onPress={tmpBtn}
+						onPress={this.fs_n}
 						title='Balanced'
 						color='grey'
 					/>
 
 					<Button
-						onPress={tmpBtn}
+						onPress={this.fs_t}
 						title='Them'
 						color='blue'
 					/>
@@ -69,19 +116,19 @@ class TripleButtons extends Component {
 				<Text>Scale</Text>
 				<View style={{flexDirection: 'row'}}>
 					<Button
-						onPress={tmpBtn}
+						onPress={this.s_u}
 						title='Us'
 						color='red'
 					/>
 
 					<Button
-						onPress={tmpBtn}
+						onPress={this.s_n}
 						title='Balanced'
 						color='grey'
 					/>
 
 					<Button
-						onPress={tmpBtn}
+						onPress={this.s_t}
 						title='Them'
 						color='blue'
 					/>
@@ -90,19 +137,19 @@ class TripleButtons extends Component {
 				<Text>Near Switch</Text>
 				<View style={{flexDirection: 'row'}}>
 					<Button
-						onPress={tmpBtn}
+						onPress={this.ns_u}
 						title='Us'
 						color='red'
 					/>
 
 					<Button
-						onPress={tmpBtn}
+						onPress={this.ns_n}
 						title='Balanced'
 						color='grey'
 					/>
 
 					<Button
-						onPress={tmpBtn}
+						onPress={this.ns_t}
 						title='Them'
 						color='blue'
 					/>
