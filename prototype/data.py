@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import json
 
 TOTAL_TIME = 105.0 # total teleop time (seconds), not including endgame
 
@@ -21,10 +22,17 @@ class ScoutingData:
             tdata = df[df["TeamNum"] == team]
             M = tdata.ix[:,2:].as_matrix()
             M = np.nan_to_num(M)
-            np.savetxt("matrix.csv", M, delimiter = ",")
             x = [TOTAL_TIME] * M.shape[0]
             fit = np.linalg.lstsq(M, x)[0]
             self.fits[team] = fit
+
+        dumpable = {}
+        for item in self.fits:
+            dumpable[item] = self.fits[item].tolist()
+
+        with open('../data/scoutingdata.json', 'w') as fp:
+            json.dump(dumpable, fp)
+
 
 class IngameData:
     def __init__(self):
