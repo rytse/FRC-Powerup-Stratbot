@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, Button } from 'react-native';
 
-obj_text = 'Go to {obj}';
-powerup_text = 'Use {powerup}';
-
 const US = 1;
 const NEUTRAL = 0;
 const THEM = -1;
 
-const FAR_SWITCH = 10;
-const SCALE = 11;
-const NEAR_SWITCH = 12;
-
-var fars_state = NEUTRAL;
-var scale_state = NEUTRAL;
-var nears_state = NEUTRAL;
-
 export default class StratbotUI extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			far_switch: NEUTRAL,
+			scale: NEUTRAL,
+			near_switch: NEUTRAL,
+			obj_text: 'Go to {obj}',
+			powerup_text: 'Use {powerup}'
+		}
+	}
+
 	them_vault() {
 	}
-
 	them_boost() {
 	}
-
 	them_force() {
 	}
-us_vault() { }
+	us_vault() {
+	}
 
 	fs_u() {
 		powerup_text = 'tmp';
@@ -153,7 +153,7 @@ us_vault() { }
 
 				<View style={{flexDirection: 'row'}}>
 						<View style={{backgroundColor: 'violet'}}>
-							<Text>{obj_text}</Text>
+							<Text>{this.state.obj_text}</Text>
 						</View>
 						<Button
 							onPress={tmpBtn}
@@ -161,7 +161,7 @@ us_vault() { }
 							color='black'
 						/>
 						<View style={{backgroundColor: 'violet'}}>
-							<Text>{powerup_text}</Text>
+							<Text>{this.state.powerup_text}</Text>
 						</View>
 				</View>
 			</View>
