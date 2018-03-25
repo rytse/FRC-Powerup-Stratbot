@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Button } from 'react-native';
+import { AppRegistry, Text, View, Button, TouchableOpacity } from 'react-native';
 
 const US = 1;
 const NEUTRAL = 0;
@@ -13,12 +13,23 @@ FORCE = 2;
 
 TMP_STR = 'imported stuff';
 
+date_obj = new Date();
+
 function dotproduct(a,b) {
 	var c = 0;
 	for (var i = 0; i < a.length; i++) {
 		c += a[i] * b[i];
 	}
 	return c;
+}
+
+class IngameData {
+	constructor() {
+		this.state = [0, 0, 0];
+		this.num_attacks = [0, 0, 0, 0];
+		this.powerups = [[0, 0], [0, 0], [0, 0]];
+		this.ctime = date_obj.getMilliseconds();
+	}
 }
 
 class Agent {
@@ -42,7 +53,7 @@ class Agent {
 
 	/** Method that checks if we need to do anything */
 	update(igd) {
-		__check_flipped(igd);
+		this.__check_flipped(igd);
 		var r_time = TOTAL_TIME - igd.ctime;
 
 		var aee_margin = [0.0, 0.0, 0.0]
@@ -58,7 +69,7 @@ class Agent {
 				}
 			}
 
-			for (var j = 0; j < this.sdata.adversaries.length; j++) {
+			for (var j = 0; j < this.mdata.adversaries.length; j++) {
 				var rep = this.sdata[this.mdata.adversaries[j]][i]
 				if (rep != 0) {
 					aee_margin[i] -= l_r_time / rep;
@@ -100,9 +111,9 @@ class Agent {
 				obj_txt = 'VAL ER: obj_choice';
 		}
 
-		if (powerup_choice > 0) {
+		if (outcomes[obj_choice] > 0) {
 			powerup_txt = 'BOOST';
-		} else if (powerup_choice == 0) {
+		} else if (outcomes[obj_choice] == 0) {
 			powerup_txt = 'NONE';
 		} else {
 			powerup_txt = 'FORCE';
@@ -123,44 +134,100 @@ export default class StratbotUI extends Component {
 			powerup_text: 'Use {powerup}'
 		}
 
+		this.igd = new IngameData();
 		this.agent = new Agent();
 	}
 
 	them_vault() {
-		rep = 'something else!';
-		this.setState( {obj_text: rep} );
-		this.setState( {powerup_text: this.agent.sdata[449][0]} );
+		this.igd.num_attacks[3]--;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	them_boost() {
+		this.igd.powerups[0][1]++;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	them_force() {
+		this.igd.powerups[1][1]++;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	us_vault() {
+		this.igd.num_attacks[3]++;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 
 	fs_u() {
-		rep = 'tmp';
-		this.setState( {powerup_text: rep} );
+		this.igd.state[2] = 1;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	fs_n() {
+		this.igd.state[2] = 0;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	fs_t() {
+		this.igd.state[2] = -1;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 
 	s_u() {
+		this.igd.state[1] = 1;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	s_n() {
+		this.igd.state[1] = 0;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	s_t() {
+		this.igd.state[1] = -1;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 
 	ns_u() {
+		this.igd.state[0] = 1;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	ns_n() {
+		this.igd.state[0] = 0;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 	ns_t() {
+		this.igd.state[0] = -1;
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
 	}
 
+	reset_state() {
+		this.igd = new IngameData();
+		this.prev_state = [0, 0, 0];
+		this.last_flipped = [0.0, 0.0, 0.0];
+		var rep = this.agent.update(this.igd);
+		this.setState( {obj_text: rep[0]} );
+		this.setState( {powerup_text: rep[1]} );
+	}
 
 	render() {
 		tmpBtn = () => {}
@@ -267,11 +334,15 @@ export default class StratbotUI extends Component {
 						<View style={{backgroundColor: 'violet'}}>
 							<Text>{this.state.obj_text}</Text>
 						</View>
-						<Button
-							onPress={tmpBtn}
-							title='Reset'
-							color='black'
-						/>
+						
+						<View style={{backgroundColor: 'yellow'}}>
+							<TouchableOpacity
+								onPress={this.reset_state.bind(this)}
+							>
+								<Text>Reset</Text>
+							</TouchableOpacity>
+						</View>
+				
 						<View style={{backgroundColor: 'violet'}}>
 							<Text>{this.state.powerup_text}</Text>
 						</View>
