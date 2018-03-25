@@ -16,7 +16,7 @@ var fars_state = NEUTRAL;
 var scale_state = NEUTRAL;
 var nears_state = NEUTRAL;
 
-export default class LotsOfGreetings extends Component {
+export default class StratbotUI extends Component {
 	them_vault() {
 	}
 
@@ -25,9 +25,7 @@ export default class LotsOfGreetings extends Component {
 
 	them_force() {
 	}
-
-	us_vault() {
-	}
+us_vault() { }
 
 	fs_u() {
 		powerup_text = 'tmp';
