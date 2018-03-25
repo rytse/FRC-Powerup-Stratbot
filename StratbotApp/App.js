@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, Button } from 'react-native';
+import { Agent } from '.';
 
 const US = 1;
 const NEUTRAL = 0;
@@ -19,6 +20,8 @@ export default class StratbotUI extends Component {
 	}
 
 	them_vault() {
+		rep = 'something else!';
+		this.setState( {obj_text: rep} );
 	}
 	them_boost() {
 	}
@@ -28,7 +31,8 @@ export default class StratbotUI extends Component {
 	}
 
 	fs_u() {
-		powerup_text = 'tmp';
+		rep = 'tmp';
+		this.setState( {powerup_text: rep} );
 	}
 	fs_n() {
 	}
@@ -60,25 +64,25 @@ export default class StratbotUI extends Component {
 
 					<View style={{flexDirection: 'column'}}>
 						<Button
-							onPress={this.them_vault}
+							onPress={this.them_vault.bind(this)}
 							title='Them Vault'
 							color='darkblue'
 						/>
 
 						<Button
-							onPress={this.them_boost}
+							onPress={this.them_boost.bind(this)}
 							title='Them Boost'
 							color='green'
 						/>
 
 						<Button
-							onPress={this.them_force}
+							onPress={this.them_force.bind(this)}
 							title='Them Force'
 							color='darkgreen'
 						/>
 
 						<Button
-							onPress={this.us_vault}
+							onPress={this.us_vault.bind(this)}
 							title='Us Vault'
 							color='darkred'
 						/>
@@ -89,19 +93,19 @@ export default class StratbotUI extends Component {
 						<Text>Far Switch</Text>
 						<View style={{flexDirection: 'row'}}>
 							<Button
-								onPress={this.fs_u}
+								onPress={this.fs_u.bind(this)}
 								title='Us'
 								color='red'
 							/>
 
 							<Button
-								onPress={this.fs_n}
+								onPress={this.fs_n.bind(this)}
 								title='Balanced'
 								color='grey'
 							/>
 
 							<Button
-								onPress={this.fs_t}
+								onPress={this.fs_t.bind(this)}
 								title='Them'
 								color='blue'
 							/>
@@ -110,19 +114,19 @@ export default class StratbotUI extends Component {
 						<Text>Scale</Text>
 						<View style={{flexDirection: 'row'}}>
 							<Button
-								onPress={this.s_u}
+								onPress={this.s_u.bind(this)}
 								title='Us'
 								color='red'
 							/>
 
 							<Button
-								onPress={this.s_n}
+								onPress={this.s_n.bind(this)}
 								title='Balanced'
 								color='grey'
 							/>
 
 							<Button
-								onPress={this.s_t}
+								onPress={this.s_t.bind(this)}
 								title='Them'
 								color='blue'
 							/>
@@ -131,19 +135,19 @@ export default class StratbotUI extends Component {
 						<Text>Near Switch</Text>
 						<View style={{flexDirection: 'row'}}>
 							<Button
-								onPress={this.ns_u}
+								onPress={this.ns_u.bind(this)}
 								title='Us'
 								color='red'
 							/>
 
 							<Button
-								onPress={this.ns_n}
+								onPress={this.ns_n.bind(this)}
 								title='Balanced'
 								color='grey'
 							/>
 
 							<Button
-								onPress={this.ns_t}
+								onPress={this.ns_t.bind(this)}
 								title='Them'
 								color='blue'
 							/>
